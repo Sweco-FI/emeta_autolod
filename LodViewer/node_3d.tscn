@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://llhamhtsrv38"]
+
+[ext_resource type="Script" path="res://FreeLookCameraBase.cs" id="1_nxqba"]
+[ext_resource type="Script" path="res://LoadModels.cs" id="2_73afm"]
+[ext_resource type="Script" path="res://PerformanceReporting.cs" id="3_yfoc5"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ikx4i"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_xr83t"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_usf4i"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_sduoh"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 1, 1, 1.31204)
+far = 400000.0
+script = ExtResource("1_nxqba")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_ikx4i")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+
+[node name="LoadModels" type="Node3D" parent="."]
+script = ExtResource("2_73afm")
+
+[node name="Manual LOD" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.02843, 0, 2.03866)
+visible = false
+
+[node name="MeshInstance3D Sphere" type="MeshInstance3D" parent="Manual LOD"]
+visibility_range_end = 10.0
+visibility_range_end_margin = 1.0
+mesh = SubResource("SphereMesh_xr83t")
+
+[node name="MeshInstance3D Box" type="MeshInstance3D" parent="Manual LOD"]
+visibility_range_begin = 10.0
+visibility_range_begin_margin = 1.0
+mesh = SubResource("BoxMesh_usf4i")
+
+[node name="MeshInstance3D visibility testing" type="MeshInstance3D" parent="."]
+visible = false
+visibility_range_begin = 2.0
+mesh = SubResource("CapsuleMesh_sduoh")
+
+[node name="PerformanceReporting" type="Node3D" parent="."]
+script = ExtResource("3_yfoc5")
